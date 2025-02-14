@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A simple gift for Moka</title>
+    <title>A Simple Gift for Moka</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500&display=swap');
+
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Montserrat', sans-serif;
             background: #ffe6f2;
             color: #5a3d5c;
             text-align: center;
@@ -23,68 +25,78 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
-            background: rgba(251, 239, 245, 0.8);
+            background: #fbeff5;
             transition: opacity 1s ease-in-out;
-            padding: 20px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 36px;
+            color: #d63384;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #844d6b;
         }
 
         #notebook {
             cursor: pointer;
             max-width: 300px;
             width: 90%;
-            transition: transform 0.3s ease-in-out;
-            border-radius: 15px;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out, filter 0.2s;
         }
 
         #notebook:hover {
             transform: scale(1.05);
+            filter: brightness(1.1);
         }
 
         #diary {
             display: none;
             animation: fadeIn 1s ease-in-out;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 700px;
-            margin: auto;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            color: #d63384;
-            font-size: 32px;
-            font-weight: bold;
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            border: 5px solid #ff99cc;
         }
 
         .quote {
             font-style: italic;
-            margin: 20px 0;
+            font-size: 20px;
             color: #a64d79;
-            font-size: 18px;
-            padding: 10px;
-            background: rgba(255, 240, 245, 0.7);
-            border-radius: 10px;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Great Vibes', cursive;
         }
 
         textarea {
             width: 90%;
             height: 150px;
-            border: 2px solid #ff99cc;
-            padding: 10px;
+            border: 3px solid #ff99cc;
+            padding: 12px;
             font-size: 16px;
             border-radius: 10px;
             resize: none;
             background: #fff0f5;
-            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+            font-family: 'Montserrat', sans-serif;
         }
 
         .footer {
             margin-top: 20px;
             font-size: 14px;
             color: #8b5c7e;
+            font-weight: 500;
+        }
+
+        .music-player {
+            margin-top: 20px;
         }
 
         @keyframes fadeIn {
@@ -94,28 +106,30 @@
     </style>
 </head>
 <body>
-
 <div id="landing">
     <h1>Welcome to Whisper Diary</h1>
-    <p style="color:#8b5c7e; font-size: 18px;">Tap the notebook, Moka, to open your space.</p>
+    <p>Tap the notebook, Moka, to open your space.</p>
     <img id="notebook" src="Cover art1.jpeg" alt="Lily of the Valley Notebook" onclick="openDiary()">
 </div>
 
 <div id="diary">
-    <h1>Whisper Diary Just for you, Bestie!!</h1>
-    <p class="quote" id="affirmation"></p>
+    <div class="container">
+        <h1>Whisper Diary Just for You, Bestie!!</h1>
+        <p class="quote" id="affirmation"></p>
 
-    <h3 style="color: #5a3d5c;">Write your thoughts here:</h3>
-    <textarea placeholder="Your thoughts, dreams, whispers, or even gossips..."></textarea>
+        <h3>Write your thoughts here:</h3>
+        <textarea placeholder="Your thoughts, dreams, whispers, or even gossips..."></textarea>
 
-    <p class="footer">This is your quiet space. Nothing is saved, just let your thoughts flow.</p>
+        <div class="music-player">
+            <audio id="bg-music" loop>
+                <source src="Put your Records on.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
+        <p class="footer">This is your quiet space. Nothing is saved, just let your thoughts flow.</p>
+    </div>
 </div>
-
-<!-- Background Music -->
-<audio id="bg-music" loop>
-    <source src="Put your Records on.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
 
 <script>
     function openDiary() {
@@ -124,7 +138,7 @@
             document.getElementById("landing").style.display = "none";
             document.getElementById("diary").style.display = "block";
 
-            // Attempt to play background music
+            // Play music after user clicks the notebook
             let music = document.getElementById("bg-music");
             music.play().catch(error => {
                 console.log("Autoplay blocked. User must interact first.", error);
@@ -133,60 +147,15 @@
         }, 1000);
     }
 
+    // Random affirmation generator
     const affirmations = [
         "You are enough, just as you are.",
         "Breathe in confidence, breathe out doubt.",
         "Every day is a fresh start.",
         "You are stronger than you think.",
-        "Your dreams are valid, and your heart is brave.",
         "You deserve love and kindness.",
-        "Happiness flows through you effortlessly.",
-        "Your voice matters and deserves to be heard.",
-        "You are worthy of all the good things in life.",
-        "You have the power to create the life you want.",
-        "You are growing into the best version of yourself.",
-        "You are resilient and can overcome any challenge.",
-        "Your potential is limitless.",
-        "You radiate confidence, strength, and grace.",
-        "You are exactly where you need to be.",
-        "Trust yourself; you know what is best for you.",
-        "You are loved deeply and unconditionally.",
-        "Peace begins with you.",
-        "You are allowed to take up space.",
-        "You belong in this world, just as you are.",
-        "You are beautiful inside and out.",
-        "Your presence makes a difference in the world.",
-        "You deserve happiness and peace.",
         "You are capable of achieving greatness.",
-        "You attract positivity and love.",
-        "Your kindness makes the world a better place.",
-        "You are proud of how far you’ve come.",
-        "You choose love over fear.",
-        "You are safe and supported.",
-        "You are a light in this world.",
-        "Your thoughts create your reality.",
-        "You can handle whatever comes your way.",
-        "You embrace your uniqueness.",
-        "You are a magnet for good things.",
-        "You are worthy of respect and kindness.",
-        "You have the courage to follow your dreams.",
-        "Every challenge is an opportunity to grow.",
-        "You are free to express yourself fully.",
-        "You are grateful for the love in your life.",
-        "Your intuition guides you to what is right.",
-        "You are worthy of healing and happiness.",
-        "You trust in the timing of your life.",
-        "You are open to new experiences and growth.",
-        "You deserve to be seen, heard, and valued.",
-        "Your dreams are possible and within reach.",
-        "You give yourself permission to rest.",
-        "You are surrounded by love and positivity.",
-        "You have everything you need within you.",
-        "You choose to focus on what brings you joy.",
-        "You let go of what no longer serves you.",
-        "You are worthy of success and abundance.",
-        "You celebrate your progress, no matter how small.",
-        "Your happiness is important."
+        "You are worthy of all the good things in life."
     ];
 
     document.getElementById("affirmation").innerText = affirmations[Math.floor(Math.random() * affirmations.length)];
