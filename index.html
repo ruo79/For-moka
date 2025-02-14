@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Simple Gift for Moka</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Indie Flower', cursive;
+            background: #f8f3e3;
+            color: #5a3e36;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #landing {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            transition: opacity 1s;
+        }
+
+        #notebook {
+            width: 300px;
+            cursor: pointer;
+            animation: float 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        #diary {
+            display: none;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border: 5px solid #ff99cc;
+        }
+
+        h1 {
+            color: #d63384;
+            font-size: 28px;
+        }
+
+        .quote {
+            font-style: italic;
+            color: #a64d79;
+            font-size: 18px;
+        }
+
+        textarea {
+            width: 90%;
+            height: 150px;
+            border: 2px solid #ff99cc;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            resize: none;
+            background: #fff0f5;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #8b5c7e;
+        }
+
+        .music-btn {
+            background: #d63384;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .music-btn:hover {
+            background: #a64d79;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Page -->
+    <div id="landing">
+        <h1>Welcome to Whisper Diary</h1>
+        <p>Tap the notebook, Moka, to open your space.</p>
+        <img id="notebook" src="Cover art1.jpeg" alt="Lily of the Valley Notebook">
+    </div>
+
+    <!-- Diary Page -->
+    <div id="diary">
+        <div class="container">
+            <h1>Whisper Diary Just for You, Bestie!!</h1>
+            <p class="quote" id="affirmation"></p>
+
+            <h3>Write your thoughts here:</h3>
+            <textarea placeholder="Your thoughts, dreams, whispers, or even gossips..."></textarea>
+
+            <div class="music-player">
+                <button class="music-btn" onclick="toggleMusic()">Play Music</button>
+                <audio id="bg-music" loop>
+                    <source src="Put your Records on .mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+
+            <p class="footer">This is your quiet space. Nothing is saved, just let your thoughts flow.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth transition to open diary
+        document.getElementById("notebook").addEventListener("click", function() {
+            document.getElementById("landing").style.opacity = "0";
+            setTimeout(() => {
+                document.getElementById("landing").style.display = "none";
+                document.getElementById("diary").style.display = "block";
+            }, 1000);
+        });
+
+        // Random Affirmations
+        const affirmations = [
+            "You are enough, just as you are.",
+            "Breathe in confidence, breathe out doubt.",
+            "Every day is a fresh start.",
+            "You are stronger than you think.",
+            "Your dreams are valid, and your heart is brave.",
+            "You deserve love and kindness.",
+            "Happiness flows through you effortlessly.",
+            "Your voice matters and deserves to be heard.",
+            "You are worthy of all the good things in life.",
+            "You have the power to create the life you want.",
+            "You are growing into the best version of yourself.",
+            "You are resilient and can overcome any challenge.",
+            "Your potential is limitless.",
+            "You radiate confidence, strength, and grace.",
+            "You are exactly where you need to be.",
+            "Trust yourself; you know what is best for you.",
+            "You are loved deeply and unconditionally.",
+            "Peace begins with you.",
+            "You are allowed to take up space.",
+            "You belong in this world, just as you are.",
+            "You are beautiful inside and out.",
+            "Your presence makes a difference in the world.",
+            "You deserve happiness and peace.",
+            "You are capable of achieving greatness.",
+            "You attract positivity and love.",
+            "Your kindness makes the world a better place.",
+            "You are proud of how far you’ve come.",
+            "You choose love over fear.",
+            "You are safe and supported.",
+            "You are a light in this world."
+        ];
+
+        document.getElementById("affirmation").innerText = affirmations[Math.floor(Math.random() * affirmations.length)];
+
+        // Music player toggle
+        const music = document.getElementById("bg-music");
+        const musicBtn = document.querySelector(".music-btn");
+
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicBtn.innerText = "Pause Music";
+            } else {
+                music.pause();
+                musicBtn.innerText = "Play Music";
+            }
+        }
+    </script>
+
+</body>
+</html>
